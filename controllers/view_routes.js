@@ -2,6 +2,7 @@
 const view_router = require('express').Router();
 const { isLoggedIn } = require('./helpers');
 const User = require('../models/User');
+const Blog = require('../models/Blog');
 
 // GET route listening on localhost:3333/ - Root Route
 // We pass in our custom middleware function to redirect them back to index
@@ -18,15 +19,14 @@ view_router.get('/', isLoggedIn, (req, res) => {
       where: {
         id: user_id
       },
-      // Only retrieve the id, email and username fields from the database
-      attributes: ['id', 'email', 'username']
+      // Only retrieve the id and username fields from the database
+      attributes: ['id', 'username']
     })
       .then(user => {
         // Create a new object to avoid the handlebars/sequelize error with rendered
         // username data
         user = {
-          username: user.username,
-          email: user.email
+          username: user.username
         };
         // Render the handlebars index view and attach the user object
         res.render('index', { user });
@@ -47,5 +47,48 @@ view_router.get('/login', isLoggedIn, (req, res) => {
 view_router.get('/register', isLoggedIn, (req, res) => {
   res.render('register', { errors: req.session.errors });
 });
+
+view_router.get('/dashboard', async (req, res) => {
+  //find all blogs and all users associated with blog
+  let allUsers = await User.findAll({
+    include: Blog,
+  });
+
+  // let allUsers = await Blog.findAll({
+  //   include: ['user'],
+  // });
+  console.log(allUsers);
+
+  // allUsers = allUsers.map(userObj => userObj.toObject())
+  // console.log(allUsers);
+
+  // const allUsers = await User.findAll();
+  // console.log(allBlogs);
+  // console.log(allUsers);
+  //length check
+  // let len;
+  // if(allBlogs.length > allUsers.length) {
+  //   len = allBlogs.length;
+  // }else {
+  //   len = allUsers.length
+  // }
+  // for(let i = 0; i < len; i++){
+    
+  // }
+  // allUsers = [...allUsers];
+
+  // allUsers = allUsers.map(userObj => {
+  //   userObj.blogs = [...userObj.blogs];
+  //   return userObj;
+  // })
+  
+  res.render('dashboard', { allUsers });
+    
+  
+});
+
+view_router.get('/new_post', (req, res) => {
+  res.render('new_post');
+})
 
 module.exports = view_router;

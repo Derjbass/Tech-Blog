@@ -22,7 +22,13 @@ const app = express();
 // Share our front end files with the client-side(browser/insomnia/etc.)
 app.use(express.static(path.join('front')));
 // Set our view engine up as handlebars and use the shortname extension
-app.engine('hbs', engine({ extname: '.hbs' }));
+app.engine('hbs', engine({ 
+  extname: '.hbs',
+  runtimeOptions: {
+    allowProtoPropertiesByDefault: true,
+    allowProtoMethodsByDefault: true,
+  }
+}));
 app.set('view engine', 'hbs');
 // Allow json to be sent through from the client-side(browser) - req.body
 app.use(express.json());

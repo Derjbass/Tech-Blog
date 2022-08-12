@@ -7,7 +7,7 @@ const { isLoggedIn } = require('./helpers');
 // We shouldn't allow them to visit an auth view route if they're logged in
 auth_router.post('/register', isLoggedIn, (req, res) => {
   // Grab the properties we need from the request body
-  const { username, email, password } = req.body;
+  const { username, password } = req.body;
 
   // Check if any of the required fields are empty
   // You may have checks on the client-side, but it's always important to check
@@ -20,15 +20,15 @@ auth_router.post('/register', isLoggedIn, (req, res) => {
     return res.redirect('/register');
   }
 
-  // Find a user by email
+  // Find a user by username
   User.findOne({
     where: {
-      email
+      username
     }
   }).then(user => {
     // If the user already exists, we stop the request and send back an error
     if (user) {
-      req.session.errors = ['A user already exists with that email address.'];
+      req.session.errors = ['A user already exists with that username.'];
       return res.redirect('/register');
     }
 
@@ -76,7 +76,7 @@ auth_router.post('/login', isLoggedIn, (req, res) => {
     // If they're user object is not found, we attach an error and redirect them back
     // to /login to try again or register
     if (!user) {
-      req.session.errors = ['No user account found matching that email address.'];
+      req.session.errors = ['No user account found matching that username.'];
       return res.redirect('/login');
     }
 

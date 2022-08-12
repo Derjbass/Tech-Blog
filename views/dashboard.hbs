@@ -1,0 +1,17 @@
+{{#if allUsers}}
+    {{#each allUsers as | user |}}
+        {{#each this.blogs}}
+            <div class="container">
+                <h3 class="title">{{this.title}}
+                    <h6>posted by {{user.username}} on {{this.createdAt}}</h6>
+                </h3>
+                        <h4 class="content">{{this.content}}</h4>
+                
+            </div>
+        {{/each}}
+    {{/each}}
+
+    <form action="/new_post">
+        <input type="submit" value="Add new post">
+    </form>
+{{/if}}

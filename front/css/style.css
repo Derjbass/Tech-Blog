@@ -13,7 +13,7 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 8px 4%;
-  background: #555;
+  background: rgb(156, 3, 187);
 }
 
 header * {
@@ -24,7 +24,7 @@ header .logo {
   text-decoration: none;
 }
 
-header nav span.email {
+header nav span.username {
   margin-right: 15px;
 }
 
@@ -47,6 +47,7 @@ form {
   flex-direction: column;
   width: 350px;
   margin: 0 auto;
+  border-radius: 5px;
 }
 
 form * {
@@ -56,4 +57,40 @@ form * {
 
 form h3 {
   text-align: center;
+  background: rgb(156, 3, 187);
+  color: white;
+}
+
+div.container {
+  border: 2px solid rgb(156, 3, 187);
+  border-radius: 5px;
+  margin: 0% 15% 2%;
+}
+
+h3.title {
+  background: rgb(156, 3, 187);
+  color: white;
+  border-radius: 3px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+h4.content {
+  text-align: center;
+  padding: 5px;
+}
+
+input {
+  background: rgb(156, 3, 187);
+  border-radius: 5px;
+  color: white;
+  padding: 5px;
+  text-decoration: none;
+}
+
+a:link {
+  text-decoration: none;
 }

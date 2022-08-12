@@ -16,9 +16,3 @@ exports.isLoggedIn = function (req, res, next) {
   // the auth view(login/register)
   next();
 }
-
-// module.exports = {
-//   isLogged: () => {
-
-//   }
-// }

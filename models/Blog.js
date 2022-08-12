@@ -11,21 +11,21 @@ Blog.init({
     content: {
         type: DataTypes.STRING,
         allowNull: false,
-    },
-    user_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: User,
-            key: 'id',
-        }
     }
+    // user_id: {
+    //     type: DataTypes.INTEGER,
+    //     allowNull: false,
+    //     references: {
+    //         model: User,
+    //         key: 'id',
+    //     }
+    // }
 }, {
     sequelize: require('../config/db_connection'),
     modelName: 'blogs',
 });
 
-Blog.hasOne(User);
-User.hasMany(Blog);
+User.hasMany(Blog, { foreignKey: "user_id", targetKey: "id" });
+Blog.belongsTo(User);
 
 module.exports = Blog;
