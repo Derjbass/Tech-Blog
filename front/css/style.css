@@ -61,6 +61,11 @@ form h3 {
   color: white;
 }
 
+form button {
+  background: rgba(255, 166, 0, 0.705);
+  border-radius: 5px;
+}
+
 div.container {
   border: 2px solid rgb(156, 3, 187);
   border-radius: 5px;
@@ -84,7 +89,7 @@ h4.content {
 }
 
 input {
-  background: rgb(156, 3, 187);
+  background: rgba(156, 3, 187, 0.507);
   border-radius: 5px;
   color: white;
   padding: 5px;

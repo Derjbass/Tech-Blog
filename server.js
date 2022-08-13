@@ -15,6 +15,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 require('dotenv').config();
 // Pull in our view routes and auth_route objects from the index file
 const { view_routes, auth_routes } = require('./controllers');
+const post_routes = require('./controllers/post_routes')
 
 // Create our express app object to set up our server
 const app = express();
@@ -59,6 +60,9 @@ app.use(session({
 app.use('/', view_routes);
 // Load our auth routes and prefix all those routes with /auth
 app.use('/auth', auth_routes);
+// load post routes
+app.use('/new_post', post_routes);
+
 
 // Sync our database tables - {force: true} to drop all tables and re-sync
 db.sync({ force: false }).then(() => {

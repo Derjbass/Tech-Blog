@@ -10,8 +10,9 @@
             </div>
         {{/each}}
     {{/each}}
-
+    {{#if user}}
     <form action="/new_post">
         <input type="submit" value="Add new post">
     </form>
+    {{/if}}
 {{/if}}

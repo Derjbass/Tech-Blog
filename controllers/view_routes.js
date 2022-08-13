@@ -53,42 +53,29 @@ view_router.get('/dashboard', async (req, res) => {
   let allUsers = await User.findAll({
     include: Blog,
   });
+  //get current user
+  if(req.session.user_id) {
+    let user = await getUser(req.session.user_id);
+    res.render('dashboard', { allUsers, user });
+  }else res.render('dashboard', { allUsers });
 
-  // let allUsers = await Blog.findAll({
-  //   include: ['user'],
-  // });
-  console.log(allUsers);
 
-  // allUsers = allUsers.map(userObj => userObj.toObject())
-  // console.log(allUsers);
-
-  // const allUsers = await User.findAll();
-  // console.log(allBlogs);
-  // console.log(allUsers);
-  //length check
-  // let len;
-  // if(allBlogs.length > allUsers.length) {
-  //   len = allBlogs.length;
-  // }else {
-  //   len = allUsers.length
-  // }
-  // for(let i = 0; i < len; i++){
-    
-  // }
-  // allUsers = [...allUsers];
-
-  // allUsers = allUsers.map(userObj => {
-  //   userObj.blogs = [...userObj.blogs];
-  //   return userObj;
-  // })
-  
-  res.render('dashboard', { allUsers });
-    
   
 });
 
-view_router.get('/new_post', (req, res) => {
-  res.render('new_post');
+view_router.get('/new_post', isLoggedIn, async (req, res) => {
+  let user = await getUser(req.session.user_id);
+  res.render('new_post', { user });
 })
+
+//function to get user without having to type it out multiple times
+async function getUser(id){
+  let currentUser = await User.findOne({
+    where: {
+      id: id
+    }
+  })
+  return currentUser;
+}
 
 module.exports = view_router;
