@@ -20,8 +20,6 @@ const post_routes = require('./controllers/post_routes')
 // Create our express app object to set up our server
 const app = express();
 
-// Share our front end files with the client-side(browser/insomnia/etc.)
-app.use(express.static(path.join('front')));
 // Set our view engine up as handlebars and use the shortname extension
 app.engine('hbs', engine({ 
   extname: '.hbs',
@@ -31,6 +29,8 @@ app.engine('hbs', engine({
   }
 }));
 app.set('view engine', 'hbs');
+// Share our front end files with the client-side(browser/insomnia/etc.)
+app.use(express.static(path.join('front')));
 // Allow json to be sent through from the client-side(browser) - req.body
 app.use(express.json());
 // Allow form data to be sent through and also allow object/array data - req.body

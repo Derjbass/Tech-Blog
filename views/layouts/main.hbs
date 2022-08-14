@@ -7,12 +7,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tech Blog</title>
   <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
 </head>
 
 <body>
   <header>
     <a href="/" class="logo">
-      <h3>Tech Blog</h3>
+      {{#if user}}
+        <h3>Your Dashboard</h3>
+        {{else}}
+        <h3>Tech Blog</h3>
+      {{/if}}
+      
     </a>
     <nav>
       {{#if user}}
@@ -31,7 +37,7 @@
     {{{body}}}
   </main>
 
-  <script src="js/front.js"></script>
+<script src="js/front.js"></script>
 </body>
 
 </html>

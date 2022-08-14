@@ -11,6 +11,11 @@ Blog.init({
     content: {
         type: DataTypes.STRING,
         allowNull: false,
+    },
+    update: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
     }
     // user_id: {
     //     type: DataTypes.INTEGER,

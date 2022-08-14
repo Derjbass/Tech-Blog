@@ -1,0 +1,12 @@
+{{#if blogToUpdate}}
+    <div data-id="{{blogToUpdate.id}}" class="containerLoggedIn">
+        <h3 class="title">{{blogToUpdate.title}}
+            <h6>posted on {{blogToUpdate.createdAt}}</h6>
+        </h3>
+        <h4 class="content">{{blogToUpdate.content}}</h4>
+    </div>
+    <form action="new_post/update" method="post">
+        <textarea name="content" type="text" cols="90" rows="10" placeholder="Update Blog Here"></textarea>
+        <button>Update</button>
+    </form>
+{{/if}}
