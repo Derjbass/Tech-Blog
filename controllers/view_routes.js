@@ -3,6 +3,7 @@ const view_router = require('express').Router();
 const { isLoggedIn } = require('./helpers');
 const User = require('../models/User');
 const Blog = require('../models/Blog');
+const Comment = require('../models/Comment')
 
 // GET route listening on localhost:3333/ - Root Route
 // We pass in our custom middleware function to redirect them back to index
@@ -11,10 +12,13 @@ view_router.get('/', isLoggedIn, async (req, res) => {
   // Pull the user id from the session object
   const user_id = req.session.user_id;
 
-  //find all blogs and all users associated with blog
+  //find all blogs, comments, and users associated with blog
   let allUsers = await User.findAll({
     include: Blog,
   });
+  let allBlogs = await Blog.findAll({
+    include: Comment,
+  })
   // If there is a user id stored, we can use that to look up the user by id
   if (user_id) {
     // Using "return" stops the other code outside of the if block from running - this
@@ -33,7 +37,7 @@ view_router.get('/', isLoggedIn, async (req, res) => {
           username: user.username
         };
         // Render the handlebars index view and attach the user object
-        res.render('index', { user, allUsers });
+        res.render('index', { user, allUsers, allBlogs });
       });
   }
   res.render('index', { allUsers });
@@ -88,6 +92,11 @@ view_router.get('/update/:id', isLoggedIn, async (req, res) => {
   res.send(getBlog);
 })
 
+view_router.get('/comment/:id', async (req, res) => {
+  let blogToComment = await Blog.findByPk(req.params.id)
+
+  res.send(blogToComment);
+})
 
 //function to get user without having to type it out multiple times
 async function getUser(id){

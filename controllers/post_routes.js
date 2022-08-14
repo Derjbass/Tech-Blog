@@ -24,13 +24,13 @@ post_router.post('/update/:id', (req, res) => {
         }
     }
     );
-    res.redirect('/update');
 });
 
 //update blog post contents
-post_router.post('/update', (req,res) => {
+post_router.post('/update', (req, res) => {
     console.log("Blog updater route triggered");
     Blog.update({
+        title: req.body.title,
         content: req.body.content,
         update: false
     },
@@ -40,6 +40,23 @@ post_router.post('/update', (req,res) => {
         }
     });
     res.redirect(303, '/dashboard');
+})
+
+//delete blog post
+post_router.post('/delete', (req, res) => {
+    console.log("Blog delete triggered");
+    Blog.destroy({
+        where: {
+            update: true
+        }
+    });
+    res.redirect('/dashboard');
+})
+
+//add comment to blog
+post_router.get('/comment', (req, res) => {
+    let blogToComment = Blog.findByPk(req.data.id)
+    res.render('comment', { blogToComment })
 })
 
 module.exports = post_router;

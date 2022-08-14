@@ -66,15 +66,26 @@ form button {
   border-radius: 5px;
 }
 
-div#clickDiv {
-  border: 2px solid rgba(255, 166, 0, 0.705);
-  border-radius: 5px;
+form button#delete {
+  background: red;
+  color: white;
+}
+
+div#clickDivUpdate {
+  margin: 0% 15% 2%;
+}
+
+div#clickDivComment {
   margin: 0% 15% 2%;
 }
 
 div.containerLoggedIn {
-  border: 2px solid rgba(255, 166, 0, 0.705);
+  border: 1px solid rgba(255, 166, 0, 0.705);
   border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 3%;
+  padding-bottom: 1%;
 }
 
 div.container {
@@ -109,4 +120,8 @@ input {
 
 a:link {
   text-decoration: none;
+}
+
+textarea {
+  resize: none;
 }
