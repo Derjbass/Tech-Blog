@@ -12,7 +12,7 @@ Comment.init({
         type: DataTypes.INTEGER,
         references: {
             model: Blog,
-            key: 'id'
+            key: 'user_id'
         }
     }
 }, {

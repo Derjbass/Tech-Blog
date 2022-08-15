@@ -1,6 +1,5 @@
 const updatePost = document.getElementById('clickDivUpdate');
 const commentPost = document.getElementById('clickDivComment');
-console.log(commentPost);
 
 if(updatePost){
     updatePost.addEventListener('click', async event => {
@@ -51,20 +50,20 @@ async function getBlogToComment(id){
     //     }
     // }
 
-    if(id){
-        axios.get(`/comment/${id}`)
-            .then(data => {
-                console.log(data.data);
-                let payload = data.data
-                try {
-                    axios.get(`/new_post/comment`, payload)
-                } catch (error) {
-                    console.log(error.response);
-                }
+    // if(id){
+    //     axios.get(`/comment/${id}`)
+    //         .then(data => {
+    //             console.log(data.data);
+    //             let payload = data.data
+    //             try {
+    //                 axios.get(`/new_post/comment`, payload)
+    //             } catch (error) {
+    //                 console.log(error.response);
+    //             }
                 
-            })
-    }
-    await commentRoute();
+    //         })
+    // }
+    // await commentRoute();
 }
 
 async function commentRoute(){

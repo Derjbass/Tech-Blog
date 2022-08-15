@@ -4,21 +4,14 @@
         {{#each allUsers as | user |}}
         
             {{#each this.blogs}}
-            {{!-- <a href="/comment"> --}}
+            <a href="/post/{{this.id}}">
                 <div data-id="{{this.id}}" class="containerLoggedIn">
                     <h3 class="title">{{this.title}}
                         <h6>posted by {{user.username}} on {{this.updatedAt}}</h6>
                     </h3>
                             <h4 class="content">{{this.content}}</h4>
                 </div>
-            {{!-- </a> --}}
-            <div>
-                {{#if this.comments}}
-                    {{#each this.comments}}
-                        <h5 class="content">{{this.content}}</h5>
-                    {{/each}}
-                {{/if}}
-            </div>
+            </a>
             {{/each}}
         
         {{/each}}

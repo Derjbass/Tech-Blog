@@ -1,0 +1,24 @@
+<div data-id="{{post.id}}" class="containerLoggedIn">
+    <h3 class="title">{{post.title}}
+        <h6>posted on {{post.createdAt}}</h6>
+    </h3>
+    <h4 class="content">{{post.content}}</h4>
+</div>
+<div>
+    {{#if post.comments}}
+        {{#each post.comments}}
+            <div class="container">
+                <h5 class="content">{{this.content}}</h5>
+                <h6>Posted on {{this.createdAt}}</h6>
+            </div>            
+        {{/each}}
+    {{/if}}
+</div>
+
+    <form action="/new_post/comment" method="post">
+    Comment
+        <input name="blog_id" type="hidden" value="{{post.id}}">
+        <textarea name="content" cols="30" rows="10" placeholder="Enter Comment Here"></textarea>
+        <button >Submit Comment</button>
+    </form>
+    

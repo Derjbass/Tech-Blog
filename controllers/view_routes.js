@@ -44,7 +44,7 @@ view_router.get('/', isLoggedIn, async (req, res) => {
 
   // Sends our our index.hbs file back to the client-side - main.hbs is loaded first
   // then anything inside of index.hbs is outputted through the {{{body}}}
-  res.render('index');
+  // res.render('index');
 });
 
 view_router.get('/login', isLoggedIn, (req, res) => {
@@ -92,11 +92,19 @@ view_router.get('/update/:id', isLoggedIn, async (req, res) => {
   res.send(getBlog);
 })
 
-view_router.get('/comment/:id', async (req, res) => {
-  let blogToComment = await Blog.findByPk(req.params.id)
-
-  res.send(blogToComment);
+view_router.get('/post/:id', async (req, res) => {
+  let post = await Blog.findByPk(req.params.id, 
+    {
+      include: Comment,
+    })
+  let user = await User.findAll();
+    console.log(user);
+  res.render('post', { post, user });
 })
+
+// view_router.get('/comment', async (req, res) => {
+//   res.render('comment');
+// })
 
 //function to get user without having to type it out multiple times
 async function getUser(id){

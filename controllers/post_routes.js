@@ -53,10 +53,23 @@ post_router.post('/delete', (req, res) => {
     res.redirect('/dashboard');
 })
 
-//add comment to blog
-post_router.get('/comment', (req, res) => {
-    let blogToComment = Blog.findByPk(req.data.id)
-    res.render('comment', { blogToComment })
+//add comment to blog post
+post_router.post('/comment', (req, res) => {
+    Blog.findByPk(req.body.blog_id)
+        .then(blog => {
+            blog.createComment({
+                content: req.body.content,
+                userId: req.session.user_id,
+            }).then(() => {
+                res.redirect('/');
+            })
+        });
+    // Comment.create({
+    //     content: req.body.content,
+    //     userId: req.session.user_id,
+    //     blog_id: req.body.blog_id
+    // })
+    // res.redirect('/');
 })
 
 module.exports = post_router;
