@@ -1,16 +1,18 @@
 <div id="clickDivUpdate">
-    <a href="/update">
+    
 {{#if currentBlogs}}
     {{#each currentBlogs.blogs}}
-                <div data-id="{{this.id}}" class="containerLoggedIn">
-                    <h3 class="title">{{this.title}}
-                        <h6>posted on {{this.updatedAt}}</h6>
-                    </h3>
-                            <h4 class="content">{{this.content}}</h4>
-                </div>
+        <a href="/update/{{this.id}}">
+            <div data-id="{{this.id}}" class="containerLoggedIn">
+                <h3 class="title">{{this.title}}
+                    <h6>posted on {{this.updatedAt}}</h6>
+                </h3>
+                <h4 class="content">{{this.content}}</h4>
+            </div>
+        </a>
     {{/each}}
 {{/if}}
-</a>
+
 </div>
 
 

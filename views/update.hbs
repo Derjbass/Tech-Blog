@@ -1,18 +1,19 @@
-{{#if blogToUpdate}}
-    <div data-id="{{blogToUpdate.id}}" class="containerLoggedIn">
-        <h3 class="title">{{blogToUpdate.title}}
-            <h6>posted on {{blogToUpdate.createdAt}}</h6>
+{{#if blogs}}
+    <div class="containerLoggedIn">
+        <h3 class="title">{{blogs.title}}
+            <h6>posted on {{blogs.createdAt}}</h6>
         </h3>
-        <h4 class="content">{{blogToUpdate.content}}</h4>
+        <h4 class="content">{{blogs.content}}</h4>
     </div>
-    <form action="new_post/update" method="post">
+    <form action="/update" method="post">
+        <input type="hidden" name="id" value="{{blogs.id}}">
         <h5>Title</h5>
         <textarea name="title" type="text" cols="90" rows="1" placeholder="Update Blog Here">{{blogToUpdate.title}}</textarea>
         <h5>Content</h5>
         <textarea name="content" type="text" cols="90" rows="10" placeholder="Update Blog Here">{{blogToUpdate.content}}</textarea>
         <button>Update</button>
     </form>
-    <form action="/new_post/delete" method="post">
+    <form action="/new_post/delete/{{blogs.id}}" method="post">
         <button id="delete">Delete</button>
     </form>
 {{/if}}

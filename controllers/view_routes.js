@@ -76,20 +76,20 @@ view_router.get('/new_post', isLoggedIn, async (req, res) => {
   res.render('new_post', { user });
 })
 
-view_router.get('/update', async (req, res) => {
-  let blogToUpdate = await Blog.findOne(
-    {
-      where: {
-        update: true,
-      }
-    }
-  );
-  res.render('update', { blogToUpdate } );
-});
+// view_router.get('/update', async (req, res) => {
+//   let blogToUpdate = await Blog.findOne(
+//     {
+//       where: {
+//         update: true,
+//       }
+//     }
+//   );
+//   res.render('update', { blogToUpdate } );
+// });
 
 view_router.get('/update/:id', isLoggedIn, async (req, res) => {
-  let getBlog = await Blog.findByPk(req.params.id);
-  res.send(getBlog);
+  let blogs = await Blog.findByPk(req.params.id);
+  res.render('update', { blogs })
 })
 
 view_router.get('/post/:id', async (req, res) => {
@@ -100,6 +100,21 @@ view_router.get('/post/:id', async (req, res) => {
   let user = await User.findAll();
     console.log(user);
   res.render('post', { post, user });
+})
+
+//update blog post contents
+view_router.post('/update', (req, res) => {
+  console.log("Blog updater route triggered");
+  Blog.update({
+      title: req.body.title,
+      content: req.body.content,
+  },
+  {
+      where: {
+          id: req.body.id,
+      }
+  });
+  res.redirect(303, '/dashboard');
 })
 
 // view_router.get('/comment', async (req, res) => {

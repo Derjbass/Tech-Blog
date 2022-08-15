@@ -26,31 +26,23 @@ post_router.post('/update/:id', (req, res) => {
     );
 });
 
-//update blog post contents
-post_router.post('/update', (req, res) => {
-    console.log("Blog updater route triggered");
-    Blog.update({
-        title: req.body.title,
-        content: req.body.content,
-        update: false
-    },
-    {
-        where: {
-            update: true
-        }
-    });
-    res.redirect(303, '/dashboard');
-})
-
 //delete blog post
-post_router.post('/delete', (req, res) => {
+post_router.post('/delete/:id', (req, res) => {
     console.log("Blog delete triggered");
-    Blog.destroy({
+    Comment.destroy({
         where: {
-            update: true
+            userId: req.params.id,
         }
+    }).then(() => {
+        Blog.destroy({
+            where: {
+                id: req.params.id,
+            }
+        })
+    }).then(() => {
+        res.redirect('/dashboard');
     });
-    res.redirect('/dashboard');
+    
 })
 
 //add comment to blog post
