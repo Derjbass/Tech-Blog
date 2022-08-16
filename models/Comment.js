@@ -21,6 +21,6 @@ Comment.init({
 });
 
 Blog.hasMany(Comment, { foreignKey: "blog_id", targetKey: "id" });
-Comment.belongsTo(Blog);
+Comment.belongsTo(Blog, { onDelete: 'cascade' });
 
 module.exports = Comment;

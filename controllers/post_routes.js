@@ -29,12 +29,7 @@ post_router.post('/update/:id', (req, res) => {
 //delete blog post
 post_router.post('/delete/:id', (req, res) => {
     console.log("Blog delete triggered");
-    Comment.destroy({
-        where: {
-            userId: req.params.id,
-        }
-    }).then(() => {
-        Blog.destroy({
+    Blog.destroy({
             where: {
                 id: req.params.id,
             }
@@ -42,8 +37,7 @@ post_router.post('/delete/:id', (req, res) => {
     }).then(() => {
         res.redirect('/dashboard');
     });
-    
-})
+
 
 //add comment to blog post
 post_router.post('/comment', (req, res) => {
