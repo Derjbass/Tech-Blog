@@ -65,6 +65,6 @@ app.use('/new_post', post_routes);
 
 
 // Sync our database tables - {force: true} to drop all tables and re-sync
-db.sync({ force: true }).then(() => {
+db.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 });
