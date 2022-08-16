@@ -33,10 +33,10 @@ post_router.post('/delete/:id', (req, res) => {
             where: {
                 id: req.params.id,
             }
-        })
-    }).then(() => {
+        }).then(() => {
         res.redirect('/dashboard');
-    });
+    })
+});
 
 
 //add comment to blog post
